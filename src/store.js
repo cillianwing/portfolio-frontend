@@ -1,8 +1,10 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import { auth } from './reducers/auth';
 
 const reducer = combineReducers({
   // all reducers will go here
+  auth
 })
 
 // to enable redux extension in browser
