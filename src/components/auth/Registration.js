@@ -13,7 +13,7 @@ const Registration = (props) => {
     if (props.currentUser.isLoggedIn) {
       props.history.push('/')
     }
-  }, [props.currentUser.isLoggedIn])
+  }, [props.currentUser.isLoggedIn, props.history])
 
   const handleSubmit = (event) => {
     event.preventDefault();

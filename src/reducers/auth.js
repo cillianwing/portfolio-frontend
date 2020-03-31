@@ -1,4 +1,8 @@
-import { REQUEST_NEW_USER, NEW_USER_FAIL, SET_CURRENT_USER } from '../actions/auth';
+import { SET_CURRENT_USER, 
+  REQUEST_NEW_USER,
+  NEW_USER_FAIL,
+  REQUEST_USER_LOGIN,
+  USER_LOGIN_FAIL } from '../actions/auth';
 
 const initialAuthState = {
   isLoading: false,
@@ -9,6 +13,13 @@ const initialAuthState = {
 
 export const auth = (state = initialAuthState, action) => {
   switch (action.type) {
+    case SET_CURRENT_USER:
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: true,
+        user: action.user
+      }
     case REQUEST_NEW_USER:
       return {
         ...state,
@@ -19,12 +30,15 @@ export const auth = (state = initialAuthState, action) => {
         ...state,
         errorMessage: action.errorMessage
       }
-    case SET_CURRENT_USER:
+    case REQUEST_USER_LOGIN:
       return {
         ...state,
-        isLoading: false,
-        isLoggedIn: true,
-        user: action.user
+        isLoading: true
+      } 
+    case USER_LOGIN_FAIL:
+      return{
+        ...state,
+        errorMessage: action.errorMessage
       }
     default:
       return state
