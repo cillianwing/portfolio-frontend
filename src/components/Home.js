@@ -4,7 +4,7 @@ import Registration from './auth/Registration';
 const Home = (props) => {
   return (
     <div>
-      <Registration />
+      <h1>Home Page!</h1>
     </div>
   )
 }

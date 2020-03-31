@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createNewUser } from '../../actions/auth';
 
@@ -8,6 +8,12 @@ const Registration = (props) => {
     password: '',
     password_confirmation: ''
   })
+
+  useEffect(() => {
+    if (props.currentUser.isLoggedIn) {
+      props.history.push('/')
+    }
+  }, [props.currentUser.isLoggedIn])
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -35,4 +41,10 @@ const Registration = (props) => {
   )
 }
 
-export default connect(null, { createNewUser })(Registration);
+const mapStateToProps = state => {
+  return {
+    currentUser: state.auth
+  }
+}
+
+export default connect(mapStateToProps, { createNewUser })(Registration);

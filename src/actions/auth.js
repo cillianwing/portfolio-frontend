@@ -32,15 +32,13 @@ export const createNewUser = (credentials) => {
     },
     { withCredentials: true }
     )
-    .then(res => res.data)
-    .then(data => {
-      console.log(data.status)
-      console.log(data.user)
-      // if (data.success) {
-      //   dispatch(setCurrentUser(data.user))
-      // } else {
-      //   dispatch(newUserFail(data.failure))
-      // }
+    .then(res => {
+      if (res.data.status === 'created') {
+        console.log(res.data.user)
+        dispatch(setCurrentUser(res.data.user))
+      } else {
+        dispatch(newUserFail(res.data.message))
+      }
     }).catch(err => console.log("Error: ", err))
   }
 }

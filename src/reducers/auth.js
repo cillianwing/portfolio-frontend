@@ -2,6 +2,7 @@ import { REQUEST_NEW_USER, NEW_USER_FAIL, SET_CURRENT_USER } from '../actions/au
 
 const initialAuthState = {
   isLoading: false,
+  isLoggedIn: false,
   user: '',
   errorMessage: ''
 }
@@ -22,6 +23,7 @@ export const auth = (state = initialAuthState, action) => {
       return {
         ...state,
         isLoading: false,
+        isLoggedIn: true,
         user: action.user
       }
     default:
