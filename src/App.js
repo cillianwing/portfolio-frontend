@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import Registration from './components/auth/Registration';
 import Login from './components/auth/Login';
+import { checkLoginStatus } from './actions/auth';
 
-function App() {
+function App(props) {
+
+  useEffect(() => {
+    if (!props.currentUser.isLoggedIn) {
+      props.checkLoginStatus()
+    }
+  })
+
   return (
     <div className="app">
       <Router>
@@ -18,4 +27,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    currentUser: state.auth
+  }
+}
+
+export default connect(mapStateToProps, { checkLoginStatus })(App);

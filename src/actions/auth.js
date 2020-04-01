@@ -76,3 +76,16 @@ export const loginUser = (credentials) => {
     }).catch(err => console.log("Error: ", err))
   }
 }
+
+export const checkLoginStatus = () => {
+  return (dispatch) => {
+    return axios.get('http://localhost:3001/logged_in', {
+      withCredentials: true
+    })
+    .then(res => {
+      if (res.data.logged_in) {
+        dispatch(setCurrentUser(res.data.user))
+      }
+    }).catch(err => console.log("Error: ", err))
+  }
+}
