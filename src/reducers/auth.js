@@ -2,7 +2,8 @@ import { SET_CURRENT_USER,
   REQUEST_NEW_USER,
   NEW_USER_FAIL,
   REQUEST_USER_LOGIN,
-  USER_LOGIN_FAIL } from '../actions/auth';
+  USER_LOGIN_FAIL,
+  REQUEST_USER_LOGOUT } from '../actions/auth';
 
 const initialAuthState = {
   isLoading: false,
@@ -40,6 +41,8 @@ export const auth = (state = initialAuthState, action) => {
         ...state,
         errorMessage: action.errorMessage
       }
+    case REQUEST_USER_LOGOUT:
+      return state
     default:
       return state
   }

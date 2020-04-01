@@ -5,6 +5,7 @@ export const REQUEST_NEW_USER = "REQUEST_NEW_USER"
 export const NEW_USER_FAIL = "NEW_USER_FAIL"
 export const REQUEST_USER_LOGIN = "REQUEST_USER_LOGIN"
 export const USER_LOGIN_FAIL = "USER_LOGIN_FAIL"
+export const REQUEST_USER_LOGOUT = "REQUEST_USER_LOGOUT"
 
 export const setCurrentUser = (user) => {
   return {
@@ -36,6 +37,12 @@ export const userLoginFail = (errorMessage) => {
   return {
     type: USER_LOGIN_FAIL,
     errorMessage
+  }
+}
+
+export const requestUserLogout = () => {
+  return {
+    type: REQUEST_USER_LOGOUT
   }
 }
 
@@ -86,6 +93,17 @@ export const checkLoginStatus = () => {
       if (res.data.logged_in) {
         dispatch(setCurrentUser(res.data.user))
       }
+    }).catch(err => console.log("Error: ", err))
+  }
+}
+
+export const logoutUser = () => {
+  return (dispatch) => {
+    return axios.delete('http://localhost:3001/logout', {
+      withCredentials: true
+    })
+    .then(res => {
+      dispatch(requestUserLogout())
     }).catch(err => console.log("Error: ", err))
   }
 }
